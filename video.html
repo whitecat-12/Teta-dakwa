@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teta Dakwa - Video Pembelajaran Islami</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #38b2ac;
+            --secondary: #0e7490;
+            --accent: #f59e0b;
+        }
+        
+        body {
+            font-family: 'Baloo 2', cursive;
+            background-color: #f8fafc;
+        }
+        
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 414px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            background: white;
+            z-index: 10;
+        }
+        
+        .nav-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-icon.active {
+            transform: translateY(-10px);
+            color: var(--primary);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-controls {
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .video-wrapper:hover .video-controls {
+            opacity: 1;
+        }
+        
+        .progress-container {
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            width: 0%;
+        }
+        
+        .video-card {
+            transition: transform 0.3s;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-duration {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .channel-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38b2ac, #0e7490);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .like-dislike-bar {
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .like-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 85%;
+        }
+        
+        .tab-item {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .app-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .app-logo-icon {
+            background: linear-gradient(135deg, #38b2ac, #0e7490);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+        }
+        
+        .app-name {
+            font-weight: 700;
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, #38b2ac, #0e7490);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .video-tag {
+            display: inline-block;
+            background: #f0fdf4;
+            color: #065f46;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile App Container -->
+    <div class="app-container">
+        <!-- App Header -->
+        <header class="bg-gradient-to-r from-primary to-secondary p-4 text-white sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <div class="app-logo">
+                    <div class="app-logo-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h1 class="app-name">TETA DAKWA</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-user-circle text-xl"></i>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content Area -->
+        <main class="pb-20">
+            <!-- Video Player Section -->
+            <section class="mb-4">
+                <div class="video-wrapper relative">
+                    <div class="video-container">
+                        <!-- Video placeholder - in a real app this would be an iframe or video element -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-gray-900 text-white">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-5xl mb-2 opacity-70"></i>
+                                <p class="text-sm">Video Pembelajaran Islami</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-controls">
+                        <button class="text-white mx-2">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="flex-1 mx-2">
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <button class="text-white mx-2">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button class="text-white mx-2">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Video Info -->
+                <div class="p-4">
+                    <h1 class="font-bold text-lg mb-2">Belajar Surah Al-Fatihah dengan Tajwid yang Benar</h1>
+                    
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="channel-avatar mr-3">TD</div>
+                            <div>
+                                <p class="font-medium">Teta Dakwa Kids</p>
+                                <p class="text-xs text-gray-500">1.2M subscribers</p>
+                            </div>
+                        </div>
+                        <button class="bg-red-500 text-white px-3 py-1 rounded-full text-sm flex items-center">
+                            <i class="fas fa-bell-slash mr-1"></i> Subscribe
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-100 p-3 rounded-lg mb-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-700">125,432 views</span>
+                            <span class="text-gray-700">2 weeks ago</span>
+                        </div>
+                        
+                        <div class="like-dislike-bar">
+                            <div class="like-bar"></div>
+                        </div>
+                        <div class="flex justify-between text-xs mt-1">
+                            <span class="text-primary font-medium">
+                                <i class="fas fa-thumbs-up mr-1"></i> 12K
+                            </span>
+                            <span class="text-gray-500">
+                                <i class="fas fa-thumbs-down mr-1"></i> 345
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Tags -->
+                    <div class="mb-4">
+                        <span class="video-tag">
+                            <i class="fas fa-tag mr-1"></i> Al-Quran
+                        </span>
+                        <span class="video-tag">
+                            <i class="fas fa-tag mr-1"></i> Tajwid
+                        </span>
+                        <span class="video-tag">
+                            <i class="fas fa-tag mr-1"></i> Pembelajaran
+                        </span>
+                        <span class="video-tag">
+                            <i class="fas fa-tag mr-1"></i> Anak Islami
+                        </span>
+                    </div>
+                    
+                    <!-- Video Description -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-3 mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-medium">Deskripsi</h3>
+                            <button class="text-primary text-sm">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Video pembelajaran ini mengajarkan cara membaca Surah Al-Fatihah dengan tajwid yang benar. Cocok untuk anak-anak yang baru belajar membaca Al-Quran. Video ini dilengkapi dengan animasi menarik dan contoh bacaan yang jelas.
+                        </p>
+                        <button class="text-primary text-sm mt-2 font-medium">
+                            Tampilkan lebih banyak
+                        </button>
+                    </div>
+                    
+                    <!-- Comments Preview -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-medium flex items-center">
+                                <i class="fas fa-comments mr-2 text-primary"></i> 245 Komentar
+                            </h3>
+                            <button class="text-sm text-gray-500 flex items-center">
+                                <i class="fas fa-sort mr-1"></i> Urutkan
+                            </button>
+                        </div>
+                        
+                        <div class="flex mb-3">
+                            <div class="channel-avatar mr-3 text-sm">AK</div>
+                            <div class="flex-1">
+                                <div class="bg-gray-100 p-3 rounded-lg">
+                                    <p class="font-medium text-sm">Ahmad Kurniawan</p>
+                                    <p class="text-sm text-gray-700 mt-1">Video yang sangat bermanfaat untuk anak saya. Terima kasih Teta Dakwa!</p>
+                                    <div class="flex mt-2">
+                                        <span class="text-xs text-gray-500 mr-3">
+                                            <i class="fas fa-thumbs-up mr-1"></i> 24
+                                        </span>
+                                        <span class="text-xs text-gray-500">
+                                            <i class="fas fa-thumbs-down mr-1"></i> 0
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">2 hari yang lalu</p>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 flex items-center justify-center">
+                            <i class="fas fa-comment-medical mr-2"></i> Tambahkan komentar
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Related Videos Section -->
+            <section class="px-4">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-bold text-lg flex items-center">
+                        <i class="fas fa-list-ul mr-2 text-primary"></i> Video Terkait
+                    </h2>
+                    <button class="text-sm text-primary">Lihat semua</button>
+                </div>
+                
+                <!-- Video Tabs -->
+                <div class="flex border-b border-gray-200 mb-4">
+                    <button class="tab-item active px-4 py-2 text-sm font-medium text-primary">Semua</button>
+                    <button class="tab-item px-4 py-2 text-sm font-medium text-gray-500">Al-Quran</button>
+                    <button class="tab-item px-4 py-2 text-sm font-medium text-gray-500">Fiqh</button>
+                    <button class="tab-item px-4 py-2 text-sm font-medium text-gray-500">Kisah Nabi</button>
+                </div>
+                
+                <!-- Video List -->
+                <div class="space-y-4">
+                    <!-- Video 1 -->
+                    <div class="video-card flex">
+                        <div class="relative mr-3 flex-shrink-0">
+                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <span class="video-duration">5:32</span>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-sm line-clamp-2">Belajar Wudhu untuk Anak dengan Cara yang Menyenangkan</h3>
+                            <p class="text-xs text-gray-500 mt-1">Teta Dakwa Kids • 45K views</p>
+                            <p class="text-xs text-gray-500">1 bulan lalu</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 2 -->
+                    <div class="video-card flex">
+                        <div class="relative mr-3 flex-shrink-0">
+                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <span class="video-duration">8:15</span>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-sm line-clamp-2">Kisah Nabi Muhammad SAW - Masa Kecil yang Penuh Hikmah</h3>
+                            <p class="text-xs text-gray-500 mt-1">Kisah Teladan • 102K views</p>
+                            <p class="text-xs text-gray-500">3 minggu lalu</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 3 -->
+                    <div class="video-card flex">
+                        <div class="relative mr-3 flex-shrink-0">
+                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <span class="video-duration">12:45</span>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-sm line-clamp-2">Hafalan Doa Sehari-hari untuk Anak Muslim</h3>
+                            <p class="text-xs text-gray-500 mt-1">Teta Dakwa Kids • 78K views</p>
+                            <p class="text-xs text-gray-500">2 bulan lalu</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 4 -->
+                    <div class="video-card flex">
+                        <div class="relative mr-3 flex-shrink-0">
+                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <span class="video-duration">6:21</span>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-sm line-clamp-2">Animasi Rukun Islam - Belajar Dasar Agama Islam</h3>
+                            <p class="text-xs text-gray-500 mt-1">Animasi Islami • 156K views</p>
+                            <p class="text-xs text-gray-500">1 minggu lalu</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="w-full mt-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 flex items-center justify-center">
+                    <i class="fas fa-sync-alt mr-2"></i> Muat lebih banyak
+                </button>
+            </section>
+        </main>
+        
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav bg-white p-2 flex justify-around items-center">
+           <a href="index.html" class="flex flex-col items-center text-gray-500">
+				<i class="fas fa-home nav-icon text-xl"></i>
+				<span class="text-xs mt-1">Beranda</span>
+			</a>
+            <a href="video.html" class="flex flex-col items-center text-gray-500">
+				<i class="fas fa-video nav-icon text-xl"></i>
+				<span class="text-xs mt-1">Video</span>
+			</a>
+            <a href="#" class="flex flex-col items-center text-gray-500">
+                <i class="fas fa-gamepad nav-icon text-xl"></i>
+                <span class="text-xs mt-1">Permainan</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500">
+                <i class="fas fa-trophy nav-icon text-xl"></i>
+                <span class="text-xs mt-1">Prestasi</span>
+            </a>
+             <a href="profil.html" class="flex flex-col items-center text-gray-500">
+				<i class="fas fa-user nav-icon text-xl"></i>
+				<span class="text-xs mt-1">Profil</span>
+			</a>
+        </nav>
+    </div>
+
+    <script>
+        // Simple interaction for bottom nav
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-icon');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all
+                    navItems.forEach(nav => {
+                        nav.classList.remove('active');
+                        nav.parentElement.classList.remove('text-primary');
+                        nav.parentElement.classList.add('text-gray-500');
+                    });
+                    
+                    // Add to clicked
+                    this.classList.add('active');
+                    this.parentElement.classList.add('text-primary');
+                    this.parentElement.classList.remove('text-gray-500');
+                });
+            });
+            
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab-item');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active', 'text-primary'));
+                    tabs.forEach(t => t.classList.add('text-gray-500'));
+                    this.classList.add('active', 'text-primary');
+                    this.classList.remove('text-gray-500');
+                });
+            });
+            
+            // Video card hover effect
+            const videoCards = document.querySelectorAll('.video-card');
+            videoCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.classList.add('shadow-md');
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('shadow-md');
+                });
+            });
+            
+            // Simulate video play/pause
+            const videoWrapper = document.querySelector('.video-wrapper');
+            const playButton = document.querySelector('.video-controls .fa-play');
+            
+            videoWrapper.addEventListener('click', function() {
+                if (playButton.classList.contains('fa-play')) {
+                    playButton.classList.remove('fa-play');
+                    playButton.classList.add('fa-pause');
+                } else {
+                    playButton.classList.remove('fa-pause');
+                    playButton.classList.add('fa-play');
+                }
+            });
+            
+            // Simulate progress bar movement
+            const progressBar = document.querySelector('.progress-bar');
+            let progress = 35;
+            const progressInterval = setInterval(() => {
+                progress += 1;
+                if (progress > 100) progress = 0;
+                progressBar.style.width = `${progress}%`;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
