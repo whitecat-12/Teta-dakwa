@@ -55,12 +55,13 @@
             background: #000;
         }
         
-        .video-container iframe {
+        .video-container video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
         }
         
         .video-controls {
@@ -192,6 +193,66 @@
             margin-right: 5px;
             margin-bottom: 5px;
         }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.6);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+        
+        .play-button i {
+            color: white;
+            font-size: 28px;
+            margin-left: 5px;
+        }
+        
+        .play-button:hover {
+            background: rgba(0,0,0,0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .volume-control {
+            width: 80px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .volume-slider {
+            width: 60px;
+            margin-left: 5px;
+            -webkit-appearance: none;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .time-display {
+            color: white;
+            font-size: 12px;
+            min-width: 40px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -204,7 +265,7 @@
                     <div class="app-logo-icon">
                         <i class="fas fa-mosque"></i>
                     </div>
-                    <h1 class="app-name">TETA DAKWAH</h1>
+                    <h1 class="app-name">TETA DAKWA</h1>
                 </div>
                 <div class="flex items-center space-x-4">
                     <i class="fas fa-search"></i>
@@ -219,28 +280,36 @@
             <section class="mb-4">
                 <div class="video-wrapper relative">
                     <div class="video-container">
-                        <!-- Video placeholder - in a real app this would be an iframe or video element -->
-                        <div class="absolute inset-0 flex items-center justify-center bg-gray-900 text-white">
-                            <div class="text-center">
-                                <i class="fas fa-play-circle text-5xl mb-2 opacity-70"></i>
-                                <p class="text-sm">Video Pembelajaran Islami</p>
-                            </div>
+                        <!-- Video element with MP4 source -->
+                       <video id="main-video" controls poster="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg">
+							<source src="video/nayla.mp4" type="video/mp4">
+							Browser kamu tidak mendukung video.
+						</video>
+                        <div class="play-button" id="play-button">
+                            <i class="fas fa-play"></i>
                         </div>
                     </div>
                     
-                    <div class="video-controls">
-                        <button class="text-white mx-2">
+                    <div class="video-controls" id="video-controls">
+                        <button class="text-white mx-2" id="play-pause-btn">
                             <i class="fas fa-play"></i>
                         </button>
                         <div class="flex-1 mx-2">
-                            <div class="progress-container">
-                                <div class="progress-bar" style="width: 35%"></div>
+                            <div class="progress-container" id="progress-container">
+                                <div class="progress-bar" id="progress-bar"></div>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="time-display" id="current-time">0:00</span>
+                                <span class="time-display" id="duration">0:00</span>
                             </div>
                         </div>
-                        <button class="text-white mx-2">
-                            <i class="fas fa-volume-up"></i>
-                        </button>
-                        <button class="text-white mx-2">
+                        <div class="volume-control">
+                            <button class="text-white" id="mute-btn">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="1">
+                        </div>
+                        <button class="text-white mx-2" id="fullscreen-btn">
                             <i class="fas fa-expand"></i>
                         </button>
                     </div>
@@ -248,7 +317,7 @@
                 
                 <!-- Video Info -->
                 <div class="p-4">
-                    <h1 class="font-bold text-lg mb-2">Belajar Surah Al-Fatihah dengan Tajwid yang Benar</h1>
+                    <h1 class="font-bold text-lg mb-2">Manfaat Spiritual dan Fisik Saat Berpuasa</h1>
                     
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center">
@@ -258,9 +327,7 @@
                                 <p class="text-xs text-gray-500">1.2M subscribers</p>
                             </div>
                         </div>
-                        <button class="bg-red-500 text-white px-3 py-1 rounded-full text-sm flex items-center">
-                            <i class="fas fa-bell-slash mr-1"></i> Subscribe
-                        </button>
+                         
                     </div>
                     
                     <div class="bg-gray-100 p-3 rounded-lg mb-4">
@@ -307,7 +374,7 @@
                             </button>
                         </div>
                         <p class="text-sm text-gray-700">
-                            Video pembelajaran ini mengajarkan cara membaca Surah Al-Fatihah dengan tajwid yang benar. Cocok untuk anak-anak yang baru belajar membaca Al-Quran. Video ini dilengkapi dengan animasi menarik dan contoh bacaan yang jelas.
+                            Puasa bukan hanya soal menahan lapar dan haus. Di baliknya, ada banyak manfaat luar biasa—baik secara spiritual maupun fisik. Dalam video ini, kita bahas bagaimana puasa bisa membersihkan hati, menenangkan jiwa, sekaligus menyehatkan tubuh.
                         </p>
                         <button class="text-primary text-sm mt-2 font-medium">
                             Tampilkan lebih banyak
@@ -373,7 +440,7 @@
                     <!-- Video 1 -->
                     <div class="video-card flex">
                         <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
                             <span class="video-duration">5:32</span>
                         </div>
                         <div>
@@ -386,7 +453,7 @@
                     <!-- Video 2 -->
                     <div class="video-card flex">
                         <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
                             <span class="video-duration">8:15</span>
                         </div>
                         <div>
@@ -399,7 +466,7 @@
                     <!-- Video 3 -->
                     <div class="video-card flex">
                         <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
                             <span class="video-duration">12:45</span>
                         </div>
                         <div>
@@ -412,7 +479,7 @@
                     <!-- Video 4 -->
                     <div class="video-card flex">
                         <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://via.placeholder.com/160x90" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
+                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
                             <span class="video-duration">6:21</span>
                         </div>
                         <div>
@@ -432,13 +499,13 @@
         <!-- Bottom Navigation -->
         <nav class="bottom-nav bg-white p-2 flex justify-around items-center">
            <a href="index.html" class="flex flex-col items-center text-gray-500">
-				<i class="fas fa-home nav-icon text-xl"></i>
-				<span class="text-xs mt-1">Beranda</span>
-			</a>
+                <i class="fas fa-home nav-icon text-xl"></i>
+                <span class="text-xs mt-1">Beranda</span>
+            </a>
             <a href="video.html" class="flex flex-col items-center text-gray-500">
-				<i class="fas fa-video nav-icon text-xl"></i>
-				<span class="text-xs mt-1">Video</span>
-			</a>
+                <i class="fas fa-video nav-icon text-xl"></i>
+                <span class="text-xs mt-1">Video</span>
+            </a>
             <a href="#" class="flex flex-col items-center text-gray-500">
                 <i class="fas fa-gamepad nav-icon text-xl"></i>
                 <span class="text-xs mt-1">Permainan</span>
@@ -448,27 +515,126 @@
                 <span class="text-xs mt-1">Prestasi</span>
             </a>
              <a href="profil.html" class="flex flex-col items-center text-gray-500">
-				<i class="fas fa-user nav-icon text-xl"></i>
-				<span class="text-xs mt-1">Profil</span>
-			</a>
+                <i class="fas fa-user nav-icon text-xl"></i>
+                <span class="text-xs mt-1">Profil</span>
+            </a>
         </nav>
     </div>
 
     <script>
-        // Simple interaction for bottom nav
         document.addEventListener('DOMContentLoaded', function() {
+            // Video player functionality
+            const video = document.getElementById('main-video');
+            const playButton = document.getElementById('play-button');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const progressContainer = document.getElementById('progress-container');
+            const currentTimeDisplay = document.getElementById('current-time');
+            const durationDisplay = document.getElementById('duration');
+            const muteBtn = document.getElementById('mute-btn');
+            const volumeSlider = document.getElementById('volume-slider');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const videoControls = document.getElementById('video-controls');
+            const videoWrapper = document.querySelector('.video-wrapper');
+            
+            // Play/Pause functionality
+            function togglePlay() {
+                if (video.paused) {
+                    video.play();
+                    playButton.style.display = 'none';
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    video.pause();
+                    playButton.style.display = 'flex';
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            }
+            
+            // Event listeners
+            playButton.addEventListener('click', togglePlay);
+            playPauseBtn.addEventListener('click', togglePlay);
+            video.addEventListener('click', togglePlay);
+            
+            // Update progress bar
+            video.addEventListener('timeupdate', function() {
+                const progress = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = `${progress}%`;
+                
+                // Update time displays
+                currentTimeDisplay.textContent = formatTime(video.currentTime);
+                if (!isNaN(video.duration)) {
+                    durationDisplay.textContent = formatTime(video.duration);
+                }
+            });
+            
+            // Click on progress bar to seek
+            progressContainer.addEventListener('click', function(e) {
+                const width = this.offsetWidth;
+                const clickX = e.offsetX;
+                const duration = video.duration;
+                video.currentTime = (clickX / width) * duration;
+            });
+            
+            // Volume controls
+            muteBtn.addEventListener('click', function() {
+                if (video.volume === 0) {
+                    video.volume = volumeSlider.value;
+                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                } else {
+                    video.volume = 0;
+                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+            });
+            
+            volumeSlider.addEventListener('input', function() {
+                video.volume = this.value;
+                if (video.volume === 0) {
+                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                } else {
+                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }
+            });
+            
+            // Fullscreen
+            fullscreenBtn.addEventListener('click', function() {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            });
+            
+            // Show/hide controls on hover
+            videoWrapper.addEventListener('mouseenter', function() {
+                videoControls.style.opacity = '1';
+            });
+            
+            videoWrapper.addEventListener('mouseleave', function() {
+                if (!video.paused) {
+                    videoControls.style.opacity = '0';
+                }
+            });
+            
+            // Format time (seconds to MM:SS)
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+            
+            // Bottom nav interaction
             const navItems = document.querySelectorAll('.nav-icon');
             
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
-                    // Remove active class from all
                     navItems.forEach(nav => {
                         nav.classList.remove('active');
                         nav.parentElement.classList.remove('text-primary');
                         nav.parentElement.classList.add('text-gray-500');
                     });
                     
-                    // Add to clicked
                     this.classList.add('active');
                     this.parentElement.classList.add('text-primary');
                     this.parentElement.classList.remove('text-gray-500');
@@ -496,29 +662,6 @@
                     this.classList.remove('shadow-md');
                 });
             });
-            
-            // Simulate video play/pause
-            const videoWrapper = document.querySelector('.video-wrapper');
-            const playButton = document.querySelector('.video-controls .fa-play');
-            
-            videoWrapper.addEventListener('click', function() {
-                if (playButton.classList.contains('fa-play')) {
-                    playButton.classList.remove('fa-play');
-                    playButton.classList.add('fa-pause');
-                } else {
-                    playButton.classList.remove('fa-pause');
-                    playButton.classList.add('fa-play');
-                }
-            });
-            
-            // Simulate progress bar movement
-            const progressBar = document.querySelector('.progress-bar');
-            let progress = 35;
-            const progressInterval = setInterval(() => {
-                progress += 1;
-                if (progress > 100) progress = 0;
-                progressBar.style.width = `${progress}%`;
-            }, 1000);
         });
     </script>
 </body>
