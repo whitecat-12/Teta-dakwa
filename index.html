@@ -194,6 +194,178 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* New styles for improved daily dose */
+        .daily-dose-card {
+            background: linear-gradient(135deg, #f8fafc, #f0fdfa);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: none;
+        }
+
+        .daily-dose-header {
+            background: linear-gradient(135deg, #38b2ac, #0e7490);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .daily-dose-content {
+            padding: 16px;
+            position: relative;
+        }
+
+        .daily-dose-verse {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #334155;
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .daily-dose-verse::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 2rem;
+            color: #38b2ac;
+            line-height: 1;
+        }
+
+        .daily-dose-verse::after {
+            content: '"';
+            position: absolute;
+            right: 0;
+            bottom: -0.5em;
+            font-size: 2rem;
+            color: #38b2ac;
+            line-height: 1;
+        }
+
+        .daily-dose-reference {
+            display: block;
+            text-align: right;
+            font-style: italic;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .daily-dose-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        .daily-dose-button {
+            flex: 1;
+            margin: 0 4px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .daily-dose-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .daily-dose-button i {
+            margin-right: 6px;
+        }
+
+        .daily-dose-progress {
+            margin-top: 16px;
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .daily-dose-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #38b2ac, #0e7490);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .daily-dose-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .daily-dose-calendar {
+            position: absolute;
+            top: -20px;
+            right: 16px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .daily-dose-calendar-day {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #38b2ac;
+            line-height: 1;
+        }
+
+        .daily-dose-calendar-month {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .daily-dose-hijri {
+            position: absolute;
+            bottom: -10px;
+            right: 16px;
+            background: #f59e0b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .daily-dose-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .daily-dose-subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .daily-dose-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 16px 0;
+        }
     </style>
 </head>
 <body>
@@ -213,42 +385,57 @@
                     <i class="fas fa-user-circle text-xl"></i>
                 </div>
             </div>
-            
-            <!-- Greeting with date/hijri -->
-       
         </header>
         
         <!-- Main Content Area -->
         <main class="pb-20 islamic-pattern">
-            <!-- Daily Dose Section -->
+            <!-- Improved Daily Dose Section -->
             <section class="p-4">
-                <div class="bg-white rounded-xl shadow-md p-4 border-l-4 border-accent relative">
-                    <div class="sticker bg-yellow-400 text-white">##!</div>
-                    <div class="flex justify-between items-start">
+                <div class="daily-dose-card">
+                    <div class="daily-dose-header">
                         <div>
-                            <h3 class="font-bold text-gray-800">Dosis Harian Islami</h3>
-                            <p class="text-sm text-gray-600">Pelajari sesuatu yang baru setiap hari!</p>
+                          <div class="daily-dose-title" style="color: white;">Dosis Harian Islami</div>
+						  <div class="daily-dose-subtitle" style="color: white;">Pelajari sesuatu yang baru setiap hari!</div>
+
                         </div>
-                        <div class="bg-primary/10 text-primary p-2 rounded-lg">
-                            <i class="fas fa-calendar-day"></i>
-                        </div>
+                        
                     </div>
                     
-                    <div class="mt-4 bg-gradient-to-r from-primary/5 to-accent/5 p-3 rounded-lg">
-                        <div class="flex items-start">
-                            <div class="bg-primary text-white p-2 rounded-lg mr-3">
-                                <i class="fas fa-quote-left"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium">"Sebaik-baik kalian adalah yang mempelajari Al-Qur'an dan mengajarkannya."</p>
-                                <p class="text-xs text-gray-500 mt-1">- Sahih Bukhari</p>
-                            </div>
+                    <div class="daily-dose-content">
+                        <div class="daily-dose-verse">
+                            Barangsiapa yang menempuh jalan untuk mencari ilmu, maka Allah akan memudahkan baginya jalan menuju surga.
+                            <span class="daily-dose-reference">- HR. Muslim</span>
                         </div>
+                        
+                        <div class="daily-dose-divider"></div>
+                        
+                        <div class="daily-dose-progress">
+                            <div class="daily-dose-progress-bar" style="width: 65%"></div>
+                        </div>
+                        
+                        <div class="daily-dose-stats">
+                            <span>65% selesai</span>
+                            <span>5/7 hari</span>
+                        </div>
+                        
+                        <div class="daily-dose-actions">
+                            <button class="daily-dose-button bg-green-100 text-green-800">
+                                <i class="fas fa-book-open"></i> Baca
+                            </button>
+                            <button class="daily-dose-button bg-blue-100 text-blue-800">
+                                <i class="fas fa-headphones"></i> Dengar
+                            </button>
+                            <button class="daily-dose-button bg-purple-100 text-purple-800">
+                                <i class="fas fa-video"></i> Tonton
+                            </button>
+                        </div>
+                        
+                        <button class="w-full mt-4 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium flex items-center justify-center shadow-md hover:shadow-lg transition duration-300">
+                            <i class="fas fa-star mr-2"></i> Dapatkan 10 Poin Hari Ini
+                        </button>
+                        
+                       
                     </div>
-                    
-                    <button class="mt-3 w-full py-2 bg-primary text-white rounded-lg text-sm font-medium flex items-center justify-center">
-                        <i class="fas fa-star mr-2"></i> Dapatkan 5 Poin Hari Ini
-                    </button>
                 </div>
             </section>
             
@@ -554,8 +741,7 @@
                     </div>
                 </div>
             </section>
-            
-           
+        </main>
         
         <!-- Bottom Navigation -->
         <nav class="bottom-nav bg-white p-2 flex justify-around items-center">
@@ -568,9 +754,9 @@
                 <span class="text-xs mt-1">Video</span>
             </a>
             <a href="kategori materi.html" class="flex flex-col items-center text-gray-500">
-				<i class="fas fa-quran nav-icon text-xl"></i>
-				<span class="text-xs mt-1">Materi Harian</span>
-			</a>
+                <i class="fas fa-quran nav-icon text-xl"></i>
+                <span class="text-xs mt-1">Materi Harian</span>
+            </a>
             <a href="kategori soal.html" class="flex flex-col items-center text-gray-500">
                 <i class="fas fa-book-open nav-icon text-xl"></i>
                 <span class="text-xs mt-1">Soal Harian</span>
@@ -580,6 +766,7 @@
                 <span class="text-xs mt-1">Profil</span>
             </a>
         </nav>
+    </div>
 
     <script>
         // Simple interaction for bottom nav
