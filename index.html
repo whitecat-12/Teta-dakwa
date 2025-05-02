@@ -419,15 +419,16 @@
                         </div>
                         
                         <div class="daily-dose-actions">
-                            <button class="daily-dose-button bg-green-100 text-green-800">
-                                <i class="fas fa-book-open"></i> Baca
-                            </button>
-                            <button class="daily-dose-button bg-blue-100 text-blue-800">
-                                <i class="fas fa-headphones"></i> Dengar
-                            </button>
-                            <button class="daily-dose-button bg-purple-100 text-purple-800">
-                                <i class="fas fa-video"></i> Tonton
-                            </button>
+                            <button onclick="window.location.href='kategori materi.html'" class="daily-dose-button bg-green-100 text-green-800">
+								<i class="fas fa-book-open"></i> Baca
+							</button>
+							<button onclick="window.location.href='al fatihah.html'" class="daily-dose-button bg-blue-100 text-blue-800">
+								<i class="fas fa-quran nav-icon"></i> Quran
+							</button>
+							<button onclick="window.location.href='video.html'" class="daily-dose-button bg-purple-100 text-purple-800">
+								<i class="fas fa-video"></i> Tonton
+							</button>
+
                         </div>
                         
                         <button class="w-full mt-4 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium flex items-center justify-center shadow-md hover:shadow-lg transition duration-300">
@@ -552,7 +553,7 @@
             </section>
             
             <!-- Section Contents -->
-            <div id="quran" class="section-content mx-4 border-l-4 border-green-500">
+             <div id="quran" class="section-content mx-4 border-l-4 border-green-500">
                 <h3 class="font-bold text-green-800 flex items-center">
                     <i class="fas fa-book-quran mr-2"></i> Perjalanan Quran
                 </h3>
@@ -560,19 +561,14 @@
                     Mulai perjalananmu untuk mempelajari dan menghafal Al-Quran dengan pelajaran interaktif, aturan tajwid, dan teknik menghafal yang dirancang khusus untuk anak-anak.
                 </p>
                 <div class="mt-3 grid grid-cols-2 gap-2">
-                    <button class="bg-green-100 text-green-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-play-circle mr-1"></i> Video Pelajaran
-                    </button>
-                    <button class="bg-green-100 text-green-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-microphone mr-1"></i> Bacaan
-                    </button>
-                    <button class="bg-green-100 text-green-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-puzzle-piece mr-1"></i> Permainan
-                    </button>
-                    <button class="bg-green-100 text-green-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-trophy mr-1"></i> Tantangan
-                    </button>
-                </div>
+					<a href="quran.html" class="bg-green-100 text-green-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-book-open mr-1"></i> materi
+					</a>
+					<a href="soal quran.html" class="bg-green-100 text-green-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-trophy mr-1"></i> kuis
+					</a>
+				</div>
+
             </div>
             
             <div id="fiqh" class="section-content mx-4 border-l-4 border-blue-500">
@@ -582,20 +578,15 @@
                 <p class="text-sm text-gray-700 mt-2">
                     Pelajari dasar-dasar fiqh Islam dengan cara yang menyenangkan! Temukan cara berwudhu, sholat, dan ibadah lainnya dengan benar melalui demonstrasi animasi.
                 </p>
-                <div class="mt-3 grid grid-cols-2 gap-2">
-                    <button class="bg-blue-100 text-blue-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-video mr-1"></i> Langkah Wudhu
-                    </button>
-                    <button class="bg-blue-100 text-blue-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-pray mr-1"></i> Panduan Sholat
-                    </button>
-                    <button class="bg-blue-100 text-blue-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-utensils mr-1"></i> Makanan Halal
-                    </button>
-                    <button class="bg-blue-100 text-blue-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-gamepad mr-1"></i> Kuis
-                    </button>
-                </div>
+              
+				<div class="mt-3 grid grid-cols-2 gap-2">
+					<a href="fiqih.html" class="bg-blue-100 text-blue-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-book-open mr-1"></i> materi
+					</a>
+					<a href="soal fiqih.html" class="bg-blue-100 text-blue-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-trophy mr-1"></i> kuis
+					</a>
+				</div>
             </div>
             
             <div id="hadith" class="section-content mx-4 border-l-4 border-purple-500">
@@ -605,20 +596,15 @@
                 <p class="text-sm text-gray-700 mt-2">
                     Jelajahi ajaran indah Nabi Muhammad SAW melalui cerita dan pelajaran yang mengajarkan adab, kebaikan, dan nilai-nilai Islam.
                 </p>
-                <div class="mt-3 grid grid-cols-2 gap-2">
-                    <button class="bg-purple-100 text-purple-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-book-open mr-1"></i> Cerita
-                    </button>
-                    <button class="bg-purple-100 text-purple-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-theater-masks mr-1"></i> Animasi
-                    </button>
-                    <button class="bg-purple-100 text-purple-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-puzzle-piece mr-1"></i> Aktivitas
-                    </button>
-                    <button class="bg-purple-100 text-purple-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-star mr-1"></i> Amal Baik
-                    </button>
-                </div>
+               
+				<div class="mt-3 grid grid-cols-2 gap-2">
+					<a href="hadist.html" class="bg-purple-100 text-purple-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-book-open mr-1"></i> materi
+					</a>
+					<a href="soal hadist.html" class="bg-purple-100 text-purple-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-trophy mr-1"></i> kuis
+					</a>
+				</div>
             </div>
             
             <div id="islamic" class="section-content mx-4 border-l-4 border-pink-500">
@@ -628,20 +614,16 @@
                 <p class="text-sm text-gray-700 mt-2">
                     Temukan sejarah kaya Islam, ilmuwan Muslim terkenal, arsitektur Islam, dan budaya dari seluruh dunia Muslim melalui peta dan garis waktu interaktif.
                 </p>
-                <div class="mt-3 grid grid-cols-2 gap-2">
-                    <button class="bg-pink-100 text-pink-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-history mr-1"></i> Sejarah
-                    </button>
-                    <button class="bg-pink-100 text-pink-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-atom mr-1"></i> Ilmuwan
-                    </button>
-                    <button class="bg-pink-100 text-pink-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-kaaba mr-1"></i> Landmark
-                    </button>
-                    <button class="bg-pink-100 text-pink-800 py-2 rounded-lg text-xs font-medium">
-                        <i class="fas fa-globe-asia mr-1"></i> Budaya
-                    </button>
-                </div>
+					
+				<div class="mt-3 grid grid-cols-2 gap-2">
+					<a href="sejarah.html" class="bg-pink-100 text-pink-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-book-open mr-1"></i> materi
+					</a>
+					<a href="soal sejarah.html" class="bg-pink-100 text-pink-800 py-2 rounded-lg text-xs font-medium flex items-center justify-center">
+						<i class="fas fa-trophy mr-1"></i> kuis
+					</a>
+				</div>
+               
             </div>
             
             <!-- New Features Section -->
@@ -705,39 +687,50 @@
                         <span class="text-xs font-bold text-orange-600 ml-2">35%</span>
                     </div>
                     
-                    <button class="mt-3 w-full py-2 bg-orange-500 text-white rounded-lg text-sm font-medium flex items-center justify-center">
-                        <i class="fas fa-play mr-2"></i> Mulai Tantangan
-                    </button>
+                    <a href="al fatihah.html" 
+						class="mt-3 w-full py-2 bg-orange-500 text-white rounded-lg text-sm font-medium flex items-center justify-center">
+						<i class="fas fa-play mr-2"></i> Mulai Tantangan
+					</a>
+
                 </div>
                 
                 <!-- Islamic Games -->
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-md p-4">
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="font-bold text-gray-800 flex items-center">
-                            <i class="fas fa-gamepad text-indigo-500 mr-2"></i> Permainan Islami
+                            <i class="fas fa-gamepad text-indigo-500 mr-2"></i> Kuis Special Islami
                         </h3>
                         <a href="#" class="text-xs text-primary">Lihat semua</a>
                     </div>
                     
                     <div class="grid grid-cols-3 gap-2">
-                        <div class="bg-white p-2 rounded-lg shadow-sm text-center">
-                            <div class="bg-indigo-100 text-indigo-500 p-2 rounded-full inline-block">
-                                <i class="fas fa-puzzle-piece"></i>
-                            </div>
-                            <p class="text-xs mt-1">Teka-teki</p>
-                        </div>
-                        <div class="bg-white p-2 rounded-lg shadow-sm text-center">
-                            <div class="bg-green-100 text-green-500 p-2 rounded-full inline-block">
-                                <i class="fas fa-question"></i>
-                            </div>
-                            <p class="text-xs mt-1">Kuis</p>
-                        </div>
-                        <div class="bg-white p-2 rounded-lg shadow-sm text-center">
-                            <div class="bg-yellow-100 text-yellow-500 p-2 rounded-full inline-block">
-                                <i class="fas fa-memory"></i>
-                            </div>
-                            <p class="text-xs mt-1">Memori</p>
-                        </div>
+                        <a href="soal sejarah.html" class="block">
+							<div class="bg-white p-2 rounded-lg shadow-sm text-center hover:shadow-md transition">
+								<div class="bg-indigo-100 text-indigo-500 p-2 rounded-full inline-block">
+									<i class="fas fa-question"></i>
+								</div>
+								<p class="text-xs mt-1">Teka-teki</p>
+							</div>
+						</a>
+
+						<a href="soal akidah.html" class="block">
+							<div class="bg-white p-2 rounded-lg shadow-sm text-center hover:shadow-md transition">
+								<div class="bg-green-100 text-green-500 p-2 rounded-full inline-block">
+									<i class="fas fa-question"></i>
+								</div>
+								<p class="text-xs mt-1">Kuis</p>
+							</div>
+						</a>
+
+						<a href="soal surah.html" class="block">
+							<div class="bg-white p-2 rounded-lg shadow-sm text-center hover:shadow-md transition">
+								<div class="bg-yellow-100 text-yellow-500 p-2 rounded-full inline-block">
+									<i class="fas fa-question"></i>
+								</div>
+								<p class="text-xs mt-1">Memori</p>
+							</div>
+						</a>
+
                     </div>
                 </div>
             </section>
