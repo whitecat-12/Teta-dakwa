@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teta Dakwa - Video Pembelajaran Islami</title>
+    <title>Teta Dakwa - Panduan Puasa Ramadhan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,6 +12,10 @@
             --primary: #38b2ac;
             --secondary: #0e7490;
             --accent: #f59e0b;
+            --quran: #10b981;
+            --fiqh: #3b82f6;
+            --hadith: #8b5cf6;
+            --islamic: #ec4899;
         }
         
         body {
@@ -47,115 +51,123 @@
             color: var(--primary);
         }
         
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            background: #000;
+        .floating-btn {
+            animation: float 4s ease-in-out infinite;
         }
         
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
         
-        .video-controls {
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            opacity: 0;
-            transition: opacity 0.3s;
+        .bounce {
+            animation: bounce 2s infinite;
         }
         
-        .video-wrapper:hover .video-controls {
-            opacity: 1;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
-        .progress-container {
-            height: 5px;
-            background: rgba(255,255,255,0.2);
-            width: 100%;
-            margin: 10px 0;
-            border-radius: 3px;
-            cursor: pointer;
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        .islamic-pattern {
+            background-image: radial-gradient(rgba(56, 178, 172, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .section-content {
+            display: none;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            margin-top: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        
+        .active-section {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .video-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .video-btn:hover {
+            transform: scale(1.1);
         }
         
         .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
             height: 100%;
-            background: var(--primary);
             border-radius: 3px;
-            width: 0%;
+            transition: width 0.5s ease;
         }
         
-        .video-card {
-            transition: transform 0.3s;
-        }
-        
-        .video-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .video-duration {
+        .sticker {
             position: absolute;
-            right: 8px;
-            bottom: 8px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 12px;
-        }
-        
-        .channel-avatar {
+            right: -10px;
+            top: -10px;
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #38b2ac, #0e7490);
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 12px;
+            transform: rotate(15deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
-        .like-dislike-bar {
-            height: 4px;
-            background: #e5e7eb;
-            border-radius: 2px;
-            margin-top: 5px;
-            overflow: hidden;
-        }
-        
-        .like-bar {
-            height: 100%;
-            background: var(--primary);
-            width: 85%;
-        }
-        
-        .tab-item {
+        .achievement-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
             position: relative;
-            padding-bottom: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        .tab-item.active::after {
+        .achievement-badge::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px 3px 0 0;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px dashed currentColor;
+            opacity: 0.3;
+            animation: spin 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .app-logo {
@@ -182,76 +194,263 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        .video-tag {
-            display: inline-block;
-            background: #f0fdf4;
-            color: #065f46;
-            padding: 3px 8px;
+
+        /* Video Player Styles */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background-color: #000;
             border-radius: 12px;
-            font-size: 12px;
-            margin-right: 5px;
-            margin-bottom: 5px;
+            overflow: hidden;
+        }
+        
+        .video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+            cursor: pointer;
+            z-index: 2;
         }
         
         .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.6);
             width: 60px;
             height: 60px;
+            background-color: rgba(255,255,255,0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            z-index: 2;
-            transition: all 0.3s;
-        }
-        
-        .play-button i {
-            color: white;
-            font-size: 28px;
-            margin-left: 5px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
         }
         
         .play-button:hover {
-            background: rgba(0,0,0,0.8);
-            transform: translate(-50%, -50%) scale(1.1);
+            transform: scale(1.1);
+            background-color: rgba(255,255,255,0.3);
         }
         
-        .volume-control {
-            width: 80px;
+        .video-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f3f4f6;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .video-time {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        /* Ramadan Content Styles */
+        .ramadan-card {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .ramadan-title {
+            font-weight: 700;
+            color: #065f46;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .ramadan-point {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        
+        .ramadan-icon {
+            min-width: 24px;
+            height: 24px;
+            background-color: #d1fae5;
+            color: #065f46;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .ramadan-content {
+            flex: 1;
+        }
+        
+        .ramadan-point-title {
+            font-weight: 600;
+            color: #065f46;
+            margin-bottom: 4px;
+        }
+        
+        .ramadan-point-desc {
+            font-size: 14px;
+            color: #4b5563;
+        }
+        
+        .ramadan-divider {
+            height: 1px;
+            background-color: #d1fae5;
+            margin: 12px 0;
+        }
+        
+        .ramadan-note {
+            background-color: #ecfdf5;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 3px solid #10b981;
+        }
+        
+        .ramadan-note-title {
+            font-weight: 600;
+            color: #065f46;
+            margin-bottom: 4px;
+        }
+        
+        .ramadan-note-content {
+            font-size: 14px;
+            color: #4b5563;
+        }
+        
+        /* Quran Verse Styles */
+        .quran-verse {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            border-right: 3px solid #10b981;
+            position: relative;
+        }
+        
+        .quran-arabic {
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+            font-size: 18px;
+            text-align: right;
+            line-height: 1.8;
+            color: #065f46;
+            margin-bottom: 8px;
+        }
+        
+        .quran-translation {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        
+        .quran-reference {
+            font-size: 12px;
+            color: #10b981;
+            text-align: right;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        .quran-icon {
+            position: absolute;
+            left: -8px;
+            top: -8px;
+            background-color: #10b981;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* Custom video controls */
+        .custom-video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-container:hover .custom-video-controls {
+            opacity: 1;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            width: 0%;
+        }
+        
+        .control-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .control-left, .control-right {
             display: flex;
             align-items: center;
         }
         
-        .volume-slider {
-            width: 60px;
-            margin-left: 5px;
-            -webkit-appearance: none;
-            height: 4px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 2px;
-            outline: none;
-        }
-        
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
+        .control-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin: 0 5px;
             cursor: pointer;
         }
         
         .time-display {
             color: white;
             font-size: 12px;
-            min-width: 40px;
-            text-align: center;
+            margin: 0 10px;
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .volume-slider {
+            width: 70px;
+            margin-left: 5px;
         }
     </style>
 </head>
@@ -259,7 +458,7 @@
     <!-- Mobile App Container -->
     <div class="app-container">
         <!-- App Header -->
-        <header class="bg-gradient-to-r from-primary to-secondary p-4 text-white sticky top-0 z-10">
+        <header class="bg-gradient-to-r from-primary to-secondary p-4 text-white">
             <div class="flex justify-between items-center">
                 <div class="app-logo">
                     <div class="app-logo-icon">
@@ -267,7 +466,7 @@
                     </div>
                     <h1 class="app-name">TETA DAKWA</h1>
                 </div>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-3">
                     <i class="fas fa-search"></i>
                     <i class="fas fa-user-circle text-xl"></i>
                 </div>
@@ -275,224 +474,178 @@
         </header>
         
         <!-- Main Content Area -->
-        <main class="pb-20">
+        <main class="pb-20 islamic-pattern">
             <!-- Video Player Section -->
-            <section class="mb-4">
-                <div class="video-wrapper relative">
-                    <div class="video-container">
-                        <!-- Video element with MP4 source -->
-                       <video id="main-video" controls poster="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg">
-							<source src="video/nayla.mp4" type="video/mp4">
-							Browser kamu tidak mendukung video.
-						</video>
-                        <div class="play-button" id="play-button">
-                            <i class="fas fa-play"></i>
+            <section class="p-4">
+                <h2 class="font-bold text-gray-800 mb-3">Video Harian Terjadwal</h2>
+                
+                <div class="video-container">
+                    <!-- Video element -->
+                   <video id="main-video" class="video-player" controls poster="https://via.placeholder.com/800x450">
+					<source src="video/nayla.mp4" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+
+                    
+                    <!-- Video placeholder (shown before play) -->
+                    <div id="video-placeholder" class="video-placeholder">
+                        <div class="play-button">
+                            <i class="fas fa-play text-xl"></i>
                         </div>
+                        <p class="text-lg font-medium">Materi harian singkat</p>
+                        <p class="text-sm opacity-80">Durasi: 04:00 menit</p>
                     </div>
                     
-                    <div class="video-controls" id="video-controls">
-                        <button class="text-white mx-2" id="play-pause-btn">
-                            <i class="fas fa-play"></i>
-                        </button>
-                        <div class="flex-1 mx-2">
-                            <div class="progress-container" id="progress-container">
-                                <div class="progress-bar" id="progress-bar"></div>
+                    <!-- Custom video controls -->
+                    <div class="custom-video-controls">
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                        <div class="control-buttons">
+                            <div class="control-left">
+                                <button class="control-btn" id="play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <span class="time-display" id="time-display">0:00 / 10:22</span>
                             </div>
-                            <div class="flex justify-between">
-                                <span class="time-display" id="current-time">0:00</span>
-                                <span class="time-display" id="duration">0:00</span>
+                            <div class="control-right">
+                                <div class="volume-container">
+                                    <button class="control-btn" id="mute-btn">
+                                        <i class="fas fa-volume-up"></i>
+                                    </button>
+                                    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="1">
+                                </div>
+                                <button class="control-btn" id="fullscreen-btn">
+                                    <i class="fas fa-expand"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="volume-control">
-                            <button class="text-white" id="mute-btn">
-                                <i class="fas fa-volume-up"></i>
-                            </button>
-                            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="1">
-                        </div>
-                        <button class="text-white mx-2" id="fullscreen-btn">
-                            <i class="fas fa-expand"></i>
-                        </button>
                     </div>
                 </div>
                 
-                <!-- Video Info -->
-                <div class="p-4">
-                    <h1 class="font-bold text-lg mb-2">Manfaat Spiritual dan Fisik Saat Berpuasa</h1>
+                <!-- Video Description -->
+                <div class="mt-3 bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">Kultum Ramadhan Persada | Nayla Arziki Ramadani Yuva | Manfaat Spiritual dan Fisik Saat Berpuasa</h3>
                     
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center">
-                            <div class="channel-avatar mr-3">TD</div>
-                            <div>
-                                <p class="font-medium">Teta Dakwa Kids</p>
-                                <p class="text-xs text-gray-500">1.2M subscribers</p>
-                            </div>
-                        </div>
-                         
-                    </div>
-                    
-                    <div class="bg-gray-100 p-3 rounded-lg mb-4">
-                        <div class="flex justify-between text-sm mb-1">
-                            <span class="text-gray-700">125,432 views</span>
-                            <span class="text-gray-700">2 weeks ago</span>
-                        </div>
-                        
-                        <div class="like-dislike-bar">
-                            <div class="like-bar"></div>
-                        </div>
-                        <div class="flex justify-between text-xs mt-1">
-                            <span class="text-primary font-medium">
-                                <i class="fas fa-thumbs-up mr-1"></i> 12K
-                            </span>
-                            <span class="text-gray-500">
-                                <i class="fas fa-thumbs-down mr-1"></i> 345
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <!-- Video Tags -->
-                    <div class="mb-4">
-                        <span class="video-tag">
-                            <i class="fas fa-tag mr-1"></i> Al-Quran
-                        </span>
-                        <span class="video-tag">
-                            <i class="fas fa-tag mr-1"></i> Tajwid
-                        </span>
-                        <span class="video-tag">
-                            <i class="fas fa-tag mr-1"></i> Pembelajaran
-                        </span>
-                        <span class="video-tag">
-                            <i class="fas fa-tag mr-1"></i> Anak Islami
-                        </span>
-                    </div>
-                    
-                    <!-- Video Description -->
-                    <div class="bg-white border border-gray-200 rounded-lg p-3 mb-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="font-medium">Deskripsi</h3>
-                            <button class="text-primary text-sm">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                        </div>
-                        <p class="text-sm text-gray-700">
-                            Puasa bukan hanya soal menahan lapar dan haus. Di baliknya, ada banyak manfaat luar biasa—baik secara spiritual maupun fisik. Dalam video ini, kita bahas bagaimana puasa bisa membersihkan hati, menenangkan jiwa, sekaligus menyehatkan tubuh.
-                        </p>
-                        <button class="text-primary text-sm mt-2 font-medium">
-                            Tampilkan lebih banyak
-                        </button>
-                    </div>
-                    
-                    <!-- Comments Preview -->
-                    <div class="mb-4">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="font-medium flex items-center">
-                                <i class="fas fa-comments mr-2 text-primary"></i> 245 Komentar
-                            </h3>
-                            <button class="text-sm text-gray-500 flex items-center">
-                                <i class="fas fa-sort mr-1"></i> Urutkan
-                            </button>
-                        </div>
-                        
-                        <div class="flex mb-3">
-                            <div class="channel-avatar mr-3 text-sm">AK</div>
-                            <div class="flex-1">
-                                <div class="bg-gray-100 p-3 rounded-lg">
-                                    <p class="font-medium text-sm">Ahmad Kurniawan</p>
-                                    <p class="text-sm text-gray-700 mt-1">Video yang sangat bermanfaat untuk anak saya. Terima kasih Teta Dakwa!</p>
-                                    <div class="flex mt-2">
-                                        <span class="text-xs text-gray-500 mr-3">
-                                            <i class="fas fa-thumbs-up mr-1"></i> 24
-                                        </span>
-                                        <span class="text-xs text-gray-500">
-                                            <i class="fas fa-thumbs-down mr-1"></i> 0
-                                        </span>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-gray-500 mt-1">2 hari yang lalu</p>
-                            </div>
-                        </div>
-                        
-                        <button class="w-full py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 flex items-center justify-center">
-                            <i class="fas fa-comment-medical mr-2"></i> Tambahkan komentar
-                        </button>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span><i class="fas fa-eye mr-1"></i> 2.5K ditonton</span>
+                        <span><i class="fas fa-calendar-alt mr-1"></i> 1 minggu lalu</span>
                     </div>
                 </div>
             </section>
             
-            <!-- Related Videos Section -->
-            <section class="px-4">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="font-bold text-lg flex items-center">
-                        <i class="fas fa-list-ul mr-2 text-primary"></i> Video Terkait
-                    </h2>
-                    <button class="text-sm text-primary">Lihat semua</button>
-                </div>
-                
-                <!-- Video Tabs -->
-                <div class="flex border-b border-gray-200 mb-4">
-                    <button class="tab-item active px-4 py-2 text-sm font-medium text-primary">Semua</button>
-                    <button class="tab-item px-4 py-2 text-sm font-medium text-gray-500">Al-Quran</button>
-                    <button class="tab-item px-4 py-2 text-sm font-medium text-gray-500">Fiqh</button>
-                    <button class="tab-item px-4 py-2 text-sm font-medium text-gray-500">Kisah Nabi</button>
-                </div>
-                
-                <!-- Video List -->
-                <div class="space-y-4">
-                    <!-- Video 1 -->
-                    <div class="video-card flex">
-                        <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
-                            <span class="video-duration">5:32</span>
+            <!-- Ramadan Fasting Content -->
+            <section class="p-4">
+                <div class="ramadan-card">
+                    <h3 class="ramadan-title">
+                        <i class="fas fa-quran mr-2"></i> Puasa Ramadhan dalam Al-Quran
+                    </h3>
+                    
+                    <div class="ramadan-point">
+                        <div class="ramadan-icon">
+                            <i class="fas fa-book-open"></i>
                         </div>
-                        <div>
-                            <h3 class="font-medium text-sm line-clamp-2">Belajar Wudhu untuk Anak dengan Cara yang Menyenangkan</h3>
-                            <p class="text-xs text-gray-500 mt-1">Teta Dakwa Kids • 45K views</p>
-                            <p class="text-xs text-gray-500">1 bulan lalu</p>
+                        <div class="ramadan-content">
+                            <h4 class="ramadan-point-title">Perintah Puasa dalam Al-Quran</h4>
+                            <p class="ramadan-point-desc">
+                                Allah SWT memerintahkan puasa Ramadhan dalam Surah Al-Baqarah ayat 183 sebagai bentuk ketaqwaan dan pendidikan rohani bagi umat Islam.
+                            </p>
+                            
+                            <div class="quran-verse mt-3">
+                                <div class="quran-icon">
+                                    <i class="fas fa-quran"></i>
+                                </div>
+                                <div class="quran-arabic">
+                                    يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ
+                                </div>
+                                <div class="quran-translation">
+                                    "Wahai orang-orang yang beriman! Diwajibkan atas kamu berpuasa sebagaimana diwajibkan atas orang sebelum kamu agar kamu bertakwa."
+                                </div>
+                                <div class="quran-reference">QS. Al-Baqarah (2): 183</div>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Video 2 -->
-                    <div class="video-card flex">
-                        <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
-                            <span class="video-duration">8:15</span>
+                    <div class="ramadan-divider"></div>
+                    
+                    <div class="ramadan-point">
+                        <div class="ramadan-icon">
+                            <i class="fas fa-moon"></i>
                         </div>
-                        <div>
-                            <h3 class="font-medium text-sm line-clamp-2">Kisah Nabi Muhammad SAW - Masa Kecil yang Penuh Hikmah</h3>
-                            <p class="text-xs text-gray-500 mt-1">Kisah Teladan • 102K views</p>
-                            <p class="text-xs text-gray-500">3 minggu lalu</p>
+                        <div class="ramadan-content">
+                            <h4 class="ramadan-point-title">Waktu Puasa Ramadhan</h4>
+                            <p class="ramadan-point-desc">
+                                Al-Quran menjelaskan waktu puasa dari terbit fajar hingga terbenam matahari, serta keistimewaan malam Ramadhan sebagai waktu turunnya Al-Quran.
+                            </p>
+                            
+                            <div class="quran-verse mt-3">
+                                <div class="quran-icon">
+                                    <i class="fas fa-quran"></i>
+                                </div>
+                                <div class="quran-arabic">
+                                    وَكُلُوا وَاشْرَبُوا حَتَّىٰ يَتَبَيَّنَ لَكُمُ الْخَيْطُ الْأَبْيَضُ مِنَ الْخَيْطِ الْأَسْوَدِ مِنَ الْفَجْرِ ۖ ثُمَّ أَتِمُّوا الصِّيَامَ إِلَى اللَّيْلِ
+                                </div>
+                                <div class="quran-translation">
+                                    "Dan makan dan minumlah hingga terang bagimu benang putih dari benang hitam, yaitu fajar. Kemudian sempurnakanlah puasa itu sampai (datang) malam."
+                                </div>
+                                <div class="quran-reference">QS. Al-Baqarah (2): 187</div>
+                            </div>
+                            
+                            <div class="quran-verse mt-3">
+                                <div class="quran-icon">
+                                    <i class="fas fa-quran"></i>
+                                </div>
+                                <div class="quran-arabic">
+                                    شَهْرُ رَمَضَانَ الَّذِي أُنْزِلَ فِيهِ الْقُرْآنُ هُدًى لِلنَّاسِ وَبَيِّنَاتٍ مِنَ الْهُدَىٰ وَالْفُرْقَانِ
+                                </div>
+                                <div class="quran-translation">
+                                    "Bulan Ramadhan adalah (bulan) yang di dalamnya diturunkan Al-Quran, sebagai petunjuk bagi manusia dan penjelasan-penjelasan mengenai petunjuk itu dan pembeda (antara yang benar dan yang batil)."
+                                </div>
+                                <div class="quran-reference">QS. Al-Baqarah (2): 185</div>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Video 3 -->
-                    <div class="video-card flex">
-                        <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
-                            <span class="video-duration">12:45</span>
+                    <div class="ramadan-divider"></div>
+                    
+                    <div class="ramadan-point">
+                        <div class="ramadan-icon">
+                            <i class="fas fa-star"></i>
                         </div>
-                        <div>
-                            <h3 class="font-medium text-sm line-clamp-2">Hafalan Doa Sehari-hari untuk Anak Muslim</h3>
-                            <p class="text-xs text-gray-500 mt-1">Teta Dakwa Kids • 78K views</p>
-                            <p class="text-xs text-gray-500">2 bulan lalu</p>
+                        <div class="ramadan-content">
+                            <h4 class="ramadan-point-title">Hikmah dan Keutamaan Puasa</h4>
+                            <p class="ramadan-point-desc">
+                                Al-Quran menjelaskan berbagai hikmah puasa, termasuk sebagai sarana mencapai ketakwaan, pengendalian diri, and kesempatan untuk memperbanyak ibadah.
+                            </p>
+                            
+                            <div class="quran-verse mt-3">
+                                <div class="quran-icon">
+                                    <i class="fas fa-quran"></i>
+                                </div>
+                                <div class="quran-arabic">
+                                    وَأَنْ تَصُومُوا خَيْرٌ لَكُمْ ۖ إِنْ كُنْتُمْ تَعْلَمُونَ
+                                </div>
+                                <div class="quran-translation">
+                                    "Dan berpuasa lebih baik bagimu jika kamu mengetahui."
+                                </div>
+                                <div class="quran-reference">QS. Al-Baqarah (2): 184</div>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Video 4 -->
-                    <div class="video-card flex">
-                        <div class="relative mr-3 flex-shrink-0">
-                            <img src="https://i.ytimg.com/vi/7R02wHUfl7U/maxresdefault.jpg" alt="Video thumbnail" class="w-40 h-24 rounded-lg object-cover">
-                            <span class="video-duration">6:21</span>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-sm line-clamp-2">Animasi Rukun Islam - Belajar Dasar Agama Islam</h3>
-                            <p class="text-xs text-gray-500 mt-1">Animasi Islami • 156K views</p>
-                            <p class="text-xs text-gray-500">1 minggu lalu</p>
-                        </div>
+                    <div class="ramadan-note">
+                        <h4 class="ramadan-note-title">
+                            <i class="fas fa-lightbulb mr-2"></i> Hikmah Puasa Menurut Al-Quran
+                        </h4>
+                        <p class="ramadan-note-content">
+                            1. Membentuk pribadi yang bertakwa (QS. Al-Baqarah: 183)<br>
+                            2. Sarana pendidikan rohani dan pengendalian diri<br>
+                            3. Mengingatkan pada nikmat Allah yang sering dilupakan<br>
+                            4. Menumbuhkan solidaritas sosial dengan merasakan lapar<br>
+                            5. Waktu khusus untuk mendekatkan diri kepada Allah
+                        </p>
                     </div>
                 </div>
-                
-                <button class="w-full mt-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 flex items-center justify-center">
-                    <i class="fas fa-sync-alt mr-2"></i> Muat lebih banyak
-                </button>
             </section>
         </main>
         
@@ -507,9 +660,9 @@
                 <span class="text-xs mt-1">Video</span>
             </a>
             <a href="kategori materi.html" class="flex flex-col items-center text-gray-500">
-				<i class="fas fa-quran nav-icon text-xl"></i>
-				<span class="text-xs mt-1">Materi Harian</span>
-			</a>
+                <i class="fas fa-quran nav-icon text-xl"></i>
+                <span class="text-xs mt-1">Materi Harian</span>
+            </a>
             <a href="kategori soal.html" class="flex flex-col items-center text-gray-500">
                 <i class="fas fa-book-open nav-icon text-xl"></i>
                 <span class="text-xs mt-1">Soal Harian</span>
@@ -525,141 +678,103 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Video player functionality
             const video = document.getElementById('main-video');
-            const playButton = document.getElementById('play-button');
+            const videoPlaceholder = document.getElementById('video-placeholder');
             const playPauseBtn = document.getElementById('play-pause-btn');
-            const progressBar = document.getElementById('progress-bar');
-            const progressContainer = document.getElementById('progress-container');
-            const currentTimeDisplay = document.getElementById('current-time');
-            const durationDisplay = document.getElementById('duration');
             const muteBtn = document.getElementById('mute-btn');
             const volumeSlider = document.getElementById('volume-slider');
+            const progressBar = document.getElementById('progress-bar');
+            const timeDisplay = document.getElementById('time-display');
             const fullscreenBtn = document.getElementById('fullscreen-btn');
-            const videoControls = document.getElementById('video-controls');
-            const videoWrapper = document.querySelector('.video-wrapper');
+            const videoContainer = document.querySelector('.video-container');
             
-            // Play/Pause functionality
-            function togglePlay() {
-                if (video.paused) {
-                    video.play();
-                    playButton.style.display = 'none';
-                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                } else {
-                    video.pause();
-                    playButton.style.display = 'flex';
-                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                }
-            }
-            
-            // Event listeners
-            playButton.addEventListener('click', togglePlay);
-            playPauseBtn.addEventListener('click', togglePlay);
-            video.addEventListener('click', togglePlay);
-            
-            // Update progress bar
-            video.addEventListener('timeupdate', function() {
-                const progress = (video.currentTime / video.duration) * 100;
-                progressBar.style.width = `${progress}%`;
-                
-                // Update time displays
-                currentTimeDisplay.textContent = formatTime(video.currentTime);
-                if (!isNaN(video.duration)) {
-                    durationDisplay.textContent = formatTime(video.duration);
-                }
-            });
-            
-            // Click on progress bar to seek
-            progressContainer.addEventListener('click', function(e) {
-                const width = this.offsetWidth;
-                const clickX = e.offsetX;
-                const duration = video.duration;
-                video.currentTime = (clickX / width) * duration;
-            });
-            
-            // Volume controls
-            muteBtn.addEventListener('click', function() {
-                if (video.volume === 0) {
-                    video.volume = volumeSlider.value;
-                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                } else {
-                    video.volume = 0;
-                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                }
-            });
-            
-            volumeSlider.addEventListener('input', function() {
-                video.volume = this.value;
-                if (video.volume === 0) {
-                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                } else {
-                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                }
-            });
-            
-            // Fullscreen
-            fullscreenBtn.addEventListener('click', function() {
-                if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.webkitRequestFullscreen) {
-                    video.webkitRequestFullscreen();
-                } else if (video.msRequestFullscreen) {
-                    video.msRequestFullscreen();
-                }
-            });
-            
-            // Show/hide controls on hover
-            videoWrapper.addEventListener('mouseenter', function() {
-                videoControls.style.opacity = '1';
-            });
-            
-            videoWrapper.addEventListener('mouseleave', function() {
-                if (!video.paused) {
-                    videoControls.style.opacity = '0';
-                }
-            });
-            
-            // Format time (seconds to MM:SS)
+            // Format time from seconds to MM:SS
             function formatTime(seconds) {
                 const minutes = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+                const remainingSeconds = Math.floor(seconds % 60);
+                return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
             }
             
-            // Bottom nav interaction
+            // Update progress bar and time display
+            function updateProgress() {
+                const progress = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = `${progress}%`;
+                timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            }
+            
+            // Click on video placeholder to play
+            videoPlaceholder.addEventListener('click', function() {
+                videoPlaceholder.style.display = 'none';
+                video.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            });
+            
+            // Play/Pause button
+            playPauseBtn.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    this.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    video.pause();
+                    this.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+            
+            // Mute button
+            muteBtn.addEventListener('click', function() {
+                video.muted = !video.muted;
+                this.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            });
+            
+            // Volume slider
+            volumeSlider.addEventListener('input', function() {
+                video.volume = this.value;
+                video.muted = this.value == 0;
+                muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            });
+            
+            // Progress bar click
+            progressBar.parentElement.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const pos = (e.pageX - rect.left) / this.offsetWidth;
+                video.currentTime = pos * video.duration;
+            });
+            
+            // Fullscreen button
+            fullscreenBtn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    videoContainer.requestFullscreen().catch(err => {
+                        alert(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+            
+            // Video events
+            video.addEventListener('timeupdate', updateProgress);
+            video.addEventListener('ended', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+            video.addEventListener('loadedmetadata', function() {
+                timeDisplay.textContent = `0:00 / ${formatTime(video.duration)}`;
+            });
+            
+            // Simple interaction for bottom nav
             const navItems = document.querySelectorAll('.nav-icon');
             
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
+                    // Remove active class from all
                     navItems.forEach(nav => {
                         nav.classList.remove('active');
                         nav.parentElement.classList.remove('text-primary');
                         nav.parentElement.classList.add('text-gray-500');
                     });
                     
+                    // Add to clicked
                     this.classList.add('active');
                     this.parentElement.classList.add('text-primary');
                     this.parentElement.classList.remove('text-gray-500');
-                });
-            });
-            
-            // Tab switching
-            const tabs = document.querySelectorAll('.tab-item');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    tabs.forEach(t => t.classList.remove('active', 'text-primary'));
-                    tabs.forEach(t => t.classList.add('text-gray-500'));
-                    this.classList.add('active', 'text-primary');
-                    this.classList.remove('text-gray-500');
-                });
-            });
-            
-            // Video card hover effect
-            const videoCards = document.querySelectorAll('.video-card');
-            videoCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.classList.add('shadow-md');
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.classList.remove('shadow-md');
                 });
             });
         });
