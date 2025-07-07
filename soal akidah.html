@@ -580,7 +580,27 @@
         </nav>
     </div>
 
-    <script>
+     <script type="module">
+		// Firebase Config & Init
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+			import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+			import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+			const firebaseConfig = {
+			  apiKey: "AIzaSyAJ5I8k2MzAyDLt9fUcXHRNtRVjKB_ETLY",
+			  authDomain: "projectid-81104.firebaseapp.com",
+			  projectId: "projectid-81104",
+			  storageBucket: "projectid-81104.appspot.com",
+			  messagingSenderId: "554913260457",
+			  appId: "1:554913260457:web:bf988867ebfd902c651ab8",
+			  measurementId: "G-8WFHQW5WGN"
+			};
+
+			const app = initializeApp(firebaseConfig);
+			const auth = getAuth(app);
+			const db = getFirestore(app);
+
+		
         // Quiz Logic
         document.addEventListener('DOMContentLoaded', function() {
             const quizCards = document.querySelectorAll('.quiz-card');
@@ -607,6 +627,25 @@
             let wrongAnswers = 0;
             let answeredQuestions = Array(totalQuestions).fill(false);
             let streakDays = 3; // Default streak days
+			
+			let currentUser = null;
+
+			// Listen auth state
+			onAuthStateChanged(auth, async (user) => {
+				if (user) {
+					currentUser = user;
+					const userRef = doc(db, "users", user.uid);
+					const userSnap = await getDoc(userRef);
+					if (userSnap.exists()) {
+						const data = userSnap.data();
+						streakDays = data.streakDays || 0;
+						streakDaysElement.textContent = streakDays + ' hari beruntun';
+					} else {
+						await setDoc(userRef, { streakDays: 0 }, { merge: true });
+					}
+				}
+			});
+
             
             // Initialize quiz
             totalQuestionsElement.textContent = totalQuestions;
@@ -729,6 +768,22 @@
             
             // Submit button click handler
             submitButton.addEventListener('click', function() {
+				if (currentUser) {
+					const userRef = doc(db, "users", currentUser.uid);
+					try {
+						await updateDoc(userRef, {
+							[`achievements.akidah`]: {
+								score: score,
+								date: new Date().toISOString(),
+							},
+							streakDays: streakDays
+						});
+					} catch (e) {
+						console.error("Gagal menyimpan ke Firestore:", e);
+					}
+				}
+
+				
                 // Hide current question
                 quizCards[currentQuestion].classList.add('hidden');
                 
